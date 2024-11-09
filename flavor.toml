@@ -1,0 +1,197 @@
+# : Theme Configuration {{{
+
+[theme]
+# Theme metadata
+name = "Dracula Pro"
+author = "Enhanced Dracula Theme"
+version = "2.0.0"
+description = "A sophisticated dark theme based on Dracula color scheme"
+
+# Color palette definition
+[theme.colors]
+background = "#282a36"
+current_line = "#44475a"
+foreground = "#f8f8f2"
+comment = "#6272a4"
+purple = "#bd93f9"
+green = "#50fa7b"
+orange = "#ffb86c"
+red = "#ff5555"
+pink = "#ff79c6"
+cyan = "#8be9fd"
+yellow = "#f1fa8c"
+
+# Animation settings
+[theme.animation]
+frames_per_second = 60
+duration = 0.2
+easing = "easeOutCubic"
+
+# : }}}
+
+# : Manager {{{
+
+[manager]
+# Enhanced preview options
+preview = { tab_size = 2, max_width = 100, max_height = 50 }
+preview_ratios = [1, 4, 4]
+preview_shown = true
+preview_service = { image = "ueberzug", video = "ffmpegthumbnailer", pdf = "pdftoppm" }
+
+# Sophisticated hover effects
+hovered = { fg = "#f8f8f2", bg = "#44475a", italic = true }
+
+# Enhanced markers with animations
+marker_copied = { fg = "#282a36", bg = "#50fa7b" }
+
+# Dynamic loading indicators
+loading_indicator_frames = "⣾⣽⣻⢿⡿⣟⣯⣷"
+loading_style = { fg = "#bd93f9", bold = true }
+
+# Enhanced folder icons
+folder_icons = { default = " ", open = " ", empty = " ", empty_open = " ", symlink = " " }
+
+# : }}}
+
+# : Status {{{
+
+[status]
+# Dynamic status bar
+refresh_rate = 1000  # ms
+separator_open = ""
+separator_close = ""
+
+# Progress bar styling
+progress_bar_style = { fg = "#bd93f9", bg = "#44475a" }
+
+# Enhanced modes
+mode_normal = { fg = "#282a36", bg = "#bd93f9", bold = true }
+
+# : }}}
+
+# : Input {{{
+
+[input]
+# Advanced input styling
+cursor_style = { fg = "#f8f8f2", bg = "#6272a4", blink = true, blink_interval = 500 }
+
+# History features
+history_size = 100
+history_unique = true
+
+# Completion styling
+completion_style = { selected_bg = "#44475a", selected_fg = "#f8f8f2", selected_bold = true, selected_italic = true }
+
+# : }}}
+
+# : Notify {{{
+
+[notify]
+# Enhanced notification system
+position = "top-right"
+timeout = 5000  # ms
+max_width = 400
+max_height = 200
+margin = 10
+padding = 8
+
+# Notification levels
+levels = { info = { fg = "#50fa7b", icon = " " }, warn = { fg = "#f1fa8c", icon = " " }, error = { fg = "#ff5555", icon = " " } }
+
+# Animation effects
+animation = { enabled = true, duration = 200, slide_in = "right", fade_out = true }
+
+# : }}}
+
+# : File-specific styles {{{
+
+[filetype]
+rules = [
+    # Development Environment
+    { name = ".env*", fg = "#50fa7b", bold = true, prefix = "󰙪 " },
+    { name = ".git*", fg = "#ff5555", italic = true, prefix = " " },
+    { name = ".docker*", fg = "#8be9fd", bold = true, prefix = "󰡨 " },
+
+    # Configuration Files
+    { name = "*.{json,yaml,yml,toml,xml}", fg = "#8be9fd", italic = true, prefix = "󰘦 " },
+    { name = "*.{ini,conf,cfg}", fg = "#6272a4", italic = true, prefix = " " },
+
+    # Web Development
+    { name = "*.{html,htm}", fg = "#ff79c6", italic = true, prefix = "󰌝 " },
+    { name = "*.{css,scss,sass,less}", fg = "#bd93f9", italic = true, prefix = "󰌜 " },
+    { name = "*.{jsx,tsx}", fg = "#8be9fd", italic = true, prefix = "󰜈 " },
+    { name = "*.{js,ts}", fg = "#f1fa8c", italic = true, prefix = "󰌞 " },
+    { name = "*.vue", fg = "#50fa7b", italic = true, prefix = "󰡄 " },
+    { name = "*.svelte", fg = "#ff5555", italic = true, prefix = "󰓓 " },
+
+    # Backend Development
+    { name = "*.{py,pyc}", fg = "#50fa7b", italic = true, prefix = "󰌠 " },
+    { name = "*.{rb,erb}", fg = "#ff5555", italic = true, prefix = "󰴭 " },
+    { name = "*.{php,phar}", fg = "#bd93f9", italic = true, prefix = "󰌟 " },
+    { name = "*.{java,jar}", fg = "#ff5555", italic = true, prefix = "󰬷 " },
+    { name = "*.go", fg = "#8be9fd", italic = true, prefix = "󰟓 " },
+    { name = "*.rs", fg = "#ff7043", italic = true, prefix = "󱘗 " },
+
+    # System Programming
+    { name = "*.{c,h}", fg = "#bd93f9", italic = true, prefix = "󰙱 " },
+    { name = "*.{cpp,hpp}", fg = "#ff79c6", italic = true, prefix = "󰙲 " },
+    { name = "*.{asm,s}", fg = "#ff5555", italic = true, prefix = "󰋖 " },
+
+    # Build Systems
+    { name = "*Makefile", fg = "#ff79c6", bold = true, prefix = "󰛕 " },
+    { name = "*CMakeLists.txt", fg = "#ff79c6", bold = true, prefix = "󰔷 " },
+    { name = "*.gradle", fg = "#8be9fd", bold = true, prefix = "󰏗 " },
+
+    # Package Managers
+    { name = "package.json", fg = "#ff5555", bold = true, prefix = "󰎙 " },
+    { name = "package-lock.json", fg = "#ff5555", italic = true, prefix = "󰎙 " },
+    { name = "composer.json", fg = "#ff79c6", bold = true, prefix = "󰎙 " },
+    { name = "Cargo.toml", fg = "#ff7043", bold = true, prefix = "󱘗 " },
+
+    # Documentation
+    { name = "*.{md,mdx}", fg = "#f1fa8c", italic = true, prefix = "󰍔 " },
+    { name = "*.rst", fg = "#f1fa8c", italic = true, prefix = "󰈙 " },
+    { name = "*.pdf", fg = "#ff5555", bold = true, prefix = "󰈙 " },
+    { name = "LICENSE*", fg = "#50fa7b", bold = true, prefix = "󰿃 " },
+    { name = "README*", fg = "#50fa7b", bold = true, prefix = " " },
+
+    # Media with size categories
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 1MB", fg = "#8be9fd", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 10MB", fg = "#ffb86c", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "> 10MB", fg = "#ff5555", prefix = "󰋯 " },
+
+    # Video files with duration indicator
+    { name = "*.{mp4,mkv}", duration = "< 10:00", fg = "#bd93f9", prefix = "󰕧 " },
+    { name = "*.{mp4,mkv}", duration = "< 1:00:00", fg = "#ffb86c", prefix = "󰕧 " },
+    { name = "*.{mp4,mkv}", duration = "> 1:00:00", fg = "#ff5555", prefix = "󰕧 " },
+
+    # Archives with compression ratio
+    { name = "*.{zip,gz,tar}", ratio = "< 0.5", fg = "#50fa7b", prefix = "󰀼 " },
+    { name = "*.{zip,gz,tar}", ratio = "< 0.7", fg = "#f1fa8c", prefix = "󰀼 " },
+    { name = "*.{zip,gz,tar}", ratio = "> 0.7", fg = "#ff5555", prefix = "󰀼 " },
+
+    # Special Directories
+    { name = "node_modules", fg = "#6272a4", prefix = "󰎙 " },
+    { name = ".git", fg = "#ff5555", prefix = " " },
+    { name = ".github", fg = "#bd93f9", prefix = " " },
+    { name = "dist", fg = "#6272a4", prefix = "󰏗 " },
+    { name = "build", fg = "#6272a4", prefix = "󱁤 " },
+
+    # Default Fallbacks
+    { name = "*", fg = "#f8f8f2" },
+    { name = "*/", fg = "#bd93f9", bold = true, prefix = " " }
+]
+
+# : }}}
+
+# : Keybindings {{{
+
+[keys]
+# Visual key hints
+show_hints = true
+hint_style = { fg = "#6272a4", bg = "#44475a", italic = true }
+
+# Command palette
+command_palette = { bg = "#282a36", fg = "#f8f8f2", selected_bg = "#44475a", selected_fg = "#f8f8f2", border = "#bd93f9" }
+
+# : }}}
