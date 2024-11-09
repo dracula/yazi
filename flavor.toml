@@ -24,12 +24,12 @@ yellow = "#f1fa8c"
 [theme.animation]
 frames_per_second = 60
 duration = 0.2
-easing = "easeOutCubic"
+easing = "easeInOutCubic"
 
 # Manager
 [manager]
 # Enhanced preview options
-preview = { tab_size = 2, max_width = 100, max_height = 50 }
+preview = { tab_size = 2, max_width = 100, max_height = 50, cache_size = 50, scroll_offset = 5 }
 preview_ratios = [1, 4, 4]
 preview_shown = true
 preview_service = { image = "ueberzug", video = "ffmpegthumbnailer", pdf = "pdftoppm" }
@@ -45,7 +45,7 @@ loading_indicator_frames = "⣾⣽⣻⢿⡿⣟⣯⣷"
 loading_style = { fg = "#bd93f9", bold = true }
 
 # Enhanced folder icons
-folder_icons = { default = " ", open = " ", empty = " ", empty_open = " ", symlink = " " }
+folder_icons = { default = " ", open = " ", empty = " ", empty_open = " ", symlink = " ", symlink_open = " ", error = " " }
 
 file_size_units = ["B", "KB", "MB", "GB", "TB", "PB", "EB"]
 
@@ -84,11 +84,26 @@ max_height = 200
 margin = 10
 padding = 8
 
-# Notification levels
-levels = { info = { fg = "#50fa7b", icon = " " }, warn = { fg = "#f1fa8c", icon = " " }, error = { fg = "#ff5555", icon = " " } }
+[notify.levels]
+info = { fg = "#50fa7b", bg = "#282a36", icon = " ", timeout = 3000 }
+warn = { fg = "#f1fa8c", bg = "#282a36", icon = " ", timeout = 5000 }
+error = { fg = "#ff5555", bg = "#282a36", icon = " ", timeout = 7000 }
+debug = { fg = "#6272a4", bg = "#282a36", icon = "󰃤 ", timeout = 2000 }
 
-# Animation effects
-animation = { enabled = true, duration = 200, slide_in = "right", fade_out = true }
+[notify.animation]
+enabled = true
+duration = 200
+slide_in = "right"
+fade_out = true
+
+[notify.border]
+fg = "#bd93f9"
+bg = "#282a36"
+style = "rounded"
+
+[notify.overlay]
+bg = "#282a36"
+blend = 0.8
 
 # File-specific styles
 [filetype]
@@ -195,7 +210,55 @@ rules = [
 
     # Default Fallbacks
     { name = "*", fg = "#f8f8f2" },
-    { name = "*/", fg = "#bd93f9", bold = true, prefix = " " }
+    { name = "*/", fg = "#bd93f9", bold = true, prefix = " " },
+
+    # Additional Development Files
+    { name = "*.{proto}", fg = "#bd93f9", italic = true, prefix = "󰯍 " },
+    { name = "*.{graphql,gql}", fg = "#ff79c6", italic = true, prefix = "󰡷 " },
+    { name = "*.{tf,tfvars}", fg = "#8be9fd", italic = true, prefix = "󱁢 " },
+
+    # Container and Cloud
+    { name = "*.{yaml,yml}", pattern = "^k8s|^kubernetes", fg = "#8be9fd", bold = true, prefix = "󱃾 " },
+    { name = "*.{yaml,yml}", pattern = "^helm", fg = "#8be9fd", bold = true, prefix = "󰠿 " },
+
+    # Data Files
+    { name = "*.{csv,tsv}", fg = "#50fa7b", italic = true, prefix = "󰈛 " },
+    { name = "*.{parquet,avro}", fg = "#bd93f9", italic = true, prefix = "󰋖 " },
+
+    # Size-based rules for documents
+    { name = "*.{pdf,epub,mobi}", size = "< 1MB", fg = "#8be9fd", prefix = "󰈙 " },
+    { name = "*.{pdf,epub,mobi}", size = "< 10MB", fg = "#ffb86c", prefix = "󰈙 " },
+    { name = "*.{pdf,epub,mobi}", size = "> 10MB", fg = "#ff5555", prefix = "󰈙 " },
+
+    # Additional Development Files
+    { name = "*.{sol}", fg = "#bd93f9", italic = true, prefix = "󰡪 " },  # Solidity files
+    { name = "*.{ex,exs}", fg = "#bd93f9", italic = true, prefix = "󰡁 " },  # Elixir files
+    { name = "*.{kt,kts}", fg = "#ff79c6", italic = true, prefix = "󱈙 " },  # Kotlin files
+    { name = "*.{swift}", fg = "#ff5555", italic = true, prefix = "󰛥 " },  # Swift files
+
+    # Config Files
+    { name = "*.{nginx,nginx.conf}", fg = "#50fa7b", italic = true, prefix = "󰻭 " },
+    { name = "*{webpack}*", fg = "#8be9fd", bold = true, prefix = "󰜫 " },
+
+    # ML/Data Science
+    { name = "*.{ipynb}", fg = "#ff79c6", italic = true, prefix = "󰠏 " },
+    { name = "*.{pkl,pickle}", fg = "#50fa7b", italic = true, prefix = "󰜎 " },
+
+    # 3D/Graphics
+    { name = "*.{blend}", fg = "#ff79c6", italic = true, prefix = "󰂫 " },
+    { name = "*.{fbx,obj,stl}", fg = "#8be9fd", italic = true, prefix = "󰆧 " },
+
+    # More granular size-based rules for media files
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 50KB", fg = "#8be9fd", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 500KB", fg = "#bd93f9", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 2MB", fg = "#ffb86c", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "< 20MB", fg = "#ff7043", prefix = "󰋯 " },
+    { name = "*.{jpg,jpeg,png,gif}", size = "> 20MB", fg = "#ff5555", prefix = "󰋯 " },
+
+    # Size categories for video files
+    { name = "*.{mp4,mkv,avi,mov}", size = "< 100MB", fg = "#8be9fd", prefix = "󰕧 " },
+    { name = "*.{mp4,mkv,avi,mov}", size = "< 1GB", fg = "#ffb86c", prefix = "󰕧 " },
+    { name = "*.{mp4,mkv,avi,mov}", size = "> 1GB", fg = "#ff5555", prefix = "󰕧 " },
 ]
 
 # Keybindings
@@ -214,14 +277,26 @@ max_width = 120
 max_height = 60
 cache_dir = "/tmp/yazi"
 
-# Enhanced preview options
-image = { enabled = true, format = "rgb" }
-video = { enabled = true, frame = "first" }
-pdf = { enabled = true, page = 1 }
-epub = { enabled = true, page = 1 }
+[preview.image]
+enabled = true
+format = "rgb"
+max_width = 1920
+max_height = 1080
+quality = 90
+animate = true
+cache = true
 
-# Syntax highlighting theme
-syntax = { theme = "Dracula", background = "#282a36" }
+[preview.preview_service]
+image = "ueberzug"
+video = "ffmpegthumbnailer"
+pdf = "pdftoppm"
+epub = "epub-thumbnailer"
+office = "libreoffice --headless --convert-to pdf"
+markdown = "glow"
+
+[preview.syntax]
+theme = "Dracula"
+background = "#282a36"
 
 # Opener
 [opener]
@@ -236,3 +311,8 @@ open = [
 reveal = [
     { exec = 'nautilus "$@"', desc = "Reveal in file manager" }
 ]
+
+# Enhanced preview features
+max_preview_size = 10485760  # 10MB limit for preview
+scroll_offset = 5
+scroll_smooth = true
