@@ -15,10 +15,12 @@ Download using the [GitHub `.zip` download](https://github.com/dracula/yazi/arch
 #### Activating theme
 
 1. Add this line in your theme.toml configuration file to use it
+
 ```bash
 [flavor]
 use = "dracula"
 ```
+
 2. Open Yazi
 
 Boom! It's working ✨
