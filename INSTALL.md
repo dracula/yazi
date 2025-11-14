@@ -1,4 +1,4 @@
-### [Foobar](https://foobar.com)
+### [Yazi](https://yazi-rs.github.io/)
 
 #### Install using Git
 
